@@ -1,1 +1,1 @@
-# ProyectoLucy
+# Proyecto Lucy
