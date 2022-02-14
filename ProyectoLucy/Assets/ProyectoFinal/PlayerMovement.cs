@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float standingHeight = 2f;
     private float timeToCrouch = 0.25f;
     private bool isCrouching;
+    private Vector3 RayOrigin;
 
     void Start()
     {
@@ -48,6 +49,20 @@ public class PlayerMovement : MonoBehaviour
             camPos.y = controller.height;
 
             playerCamera.transform.position = camPos;
+        }
+
+        RayOrigin = new Vector3(transform.position.x,1,transform.position.z);
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(RayOrigin, transform.TransformDirection(Vector3.up), out hit, 2))
+        {
+            Debug.DrawRay(RayOrigin, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
+            Debug.Log("Did Hit");
+        }
+        else
+        {
+            Debug.DrawRay(RayOrigin, transform.TransformDirection(Vector3.up) * 2, Color.white);
+            Debug.Log("Did not Hit");
         }
     }
 
